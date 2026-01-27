@@ -114,6 +114,9 @@ def run_ddp(rank, dataset_name_or_id, configuration, fold, tr, p, use_compressed
 
     nnunet_trainer = get_trainer_from_args(dataset_name_or_id, configuration, fold, tr, p,
                                            use_compressed)
+    
+    print(f"Using trainer: {type(nnunet_trainer)}")
+    nnunet_trainer.print_to_log_file(f"Using trainer: {type(nnunet_trainer)}")
 
     if disable_checkpointing:
         nnunet_trainer.disable_checkpointing = disable_checkpointing
@@ -188,7 +191,10 @@ def run_training(dataset_name_or_id: Union[str, int],
     else:
         nnunet_trainer = get_trainer_from_args(dataset_name_or_id, configuration, fold, trainer_class_name,
                                                plans_identifier, use_compressed_data, device=device)
-
+        
+        print(f"Using trainer: {type(nnunet_trainer)}")
+        nnunet_trainer.print_to_log_file(f"Using trainer: {type(nnunet_trainer)}")
+        
         if disable_checkpointing:
             nnunet_trainer.disable_checkpointing = disable_checkpointing
 
