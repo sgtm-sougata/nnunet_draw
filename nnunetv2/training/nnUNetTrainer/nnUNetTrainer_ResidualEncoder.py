@@ -5,11 +5,12 @@ from nnunetv2.utilities.plans_handling.plans_handler import ConfigurationManager
 from dynamic_network_architectures.architectures.unet import ResidualEncoderUNet
 
 class nnUNetTrainer_ResidualEncoder(nnUNetTrainer):
-    def build_network_architecture(self, plans_manager: PlansManager,
-                               dataset_json,
-                               configuration_manager: ConfigurationManager,
-                               num_input_channels=1,  # <--- add default here
-                               enable_deep_supervision: bool = True) -> nn.Module:
+    @staticmethod
+    def build_network_architecture(plans_manager: PlansManager,
+                                   dataset_json,
+                                   configuration_manager: ConfigurationManager,
+                                   num_input_channels,
+                                   enable_deep_supervision: bool = True) -> nn.Module:
         
         # Override the default PlainConvUNet with ResidualEncoderUNet
         model = ResidualEncoderUNet(
